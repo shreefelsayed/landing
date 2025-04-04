@@ -83,7 +83,15 @@ export function HeroSection() {
                 transition={{ duration: 0.3 }}
                 className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}
               >
-                {t.hero.title}
+                {language === 'en' ? (
+                  <>
+                    Online payments for <span className="text-blue-500">everyone</span>
+                  </>
+                ) : (
+                  <>
+                    مدفوعات عبر الإنترنت <span className="text-blue-500">للجميع</span>
+                  </>
+                )}
               </motion.h1>
             </AnimatePresence>
 
