@@ -28,16 +28,16 @@ export function Header() {
       </div>
 
       <nav className={`hidden md:flex items-center gap-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
-        <Link href="#" className="text-sm font-medium text-blue-500 border-b-2 border-blue-500 pb-1">
+        <Link href="/" className="text-sm font-medium text-blue-500 border-b-2 border-blue-500 pb-1">
           {t.nav.posSolution}
         </Link>
-        <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
+        <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
           {t.nav.developers}
         </Link>
-        <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
+        <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
           {t.nav.company}
         </Link>
-        <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
+        <Link href="/" className="text-sm text-gray-600 hover:text-gray-900">
           {t.nav.pricing}
         </Link>
         <Link
@@ -86,19 +86,19 @@ export function Header() {
               </div>
               <nav className="flex flex-col items-center gap-6 p-8">
                 <Link
-                  href="#"
+                  href="/"
                   className="text-lg font-medium text-blue-500 border-b-2 border-blue-500 pb-1"
                   onClick={() => setIsOpen(false)}
                 >
                   {t.nav.posSolution}
                 </Link>
-                <Link href="#" className="text-lg text-gray-600 hover:text-gray-900" onClick={() => setIsOpen(false)}>
+                <Link href="/" className="text-lg text-gray-600 hover:text-gray-900" onClick={() => setIsOpen(false)}>
                   {t.nav.developers}
                 </Link>
-                <Link href="#" className="text-lg text-gray-600 hover:text-gray-900" onClick={() => setIsOpen(false)}>
+                <Link href="/" className="text-lg text-gray-600 hover:text-gray-900" onClick={() => setIsOpen(false)}>
                   {t.nav.company}
                 </Link>
-                <Link href="#" className="text-lg text-gray-600 hover:text-gray-900" onClick={() => setIsOpen(false)}>
+                <Link href="#/" className="text-lg text-gray-600 hover:text-gray-900" onClick={() => setIsOpen(false)}>
                   {t.nav.pricing}
                 </Link>
                 <Link
