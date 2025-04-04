@@ -13,20 +13,21 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const { language, setLanguage } = useLanguage()
   const t = translations[language]
+  const isRTL = language === 'ar'
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'ar' : 'en')
   }
 
   return (
-    <header className="container flex items-center justify-between py-4">
-      <div className="flex items-center gap-2">
+    <header className={`container flex items-center justify-between py-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+      <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
         <Link href="/">
           <Image src="/images/logo.png" alt="MADFOATECH" width={160} height={60} className="h-12 w-auto" />
         </Link>
       </div>
 
-      <nav className="hidden md:flex items-center gap-8">
+      <nav className={`hidden md:flex items-center gap-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
         <Link href="#" className="text-sm font-medium text-blue-500 border-b-2 border-blue-500 pb-1">
           {t.nav.posSolution}
         </Link>
@@ -48,7 +49,7 @@ export function Header() {
         </Link>
       </nav>
 
-      <div className="flex items-center gap-4">
+      <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
         <button
           onClick={toggleLanguage}
           className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
@@ -74,7 +75,7 @@ export function Header() {
           {/* Mobile Menu Overlay */}
           {isOpen && (
             <div className="fixed inset-0 z-50 bg-white">
-              <div className="flex justify-end p-4">
+              <div className={`flex ${isRTL ? 'justify-start' : 'justify-end'} p-4`}>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 text-gray-600 focus:outline-none"
@@ -114,9 +115,6 @@ export function Header() {
                   <Globe size={16} />
                   <span>{language === 'en' ? 'العربية' : 'English'}</span>
                 </button>
-                <CustomButton className="mt-4" variant="primary" onClick={() => setIsOpen(false)}>
-                  {t.nav.signIn}
-                </CustomButton>
               </nav>
             </div>
           )}

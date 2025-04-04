@@ -58,7 +58,7 @@ export function HeroSection() {
         >
           {/* Left content */}
           <motion.div 
-            className={`w-full md:w-1/2 z-10 flex flex-col items-center md:items-start pb-12 md:pb-0 ${isRTL ? 'md:order-2' : ''}`}
+            className={`w-full md:w-1/2 z-10 flex flex-col items-center md:items-start pb-12 md:pb-0 ${isRTL ? 'md:order-2 md:text-right' : 'md:text-left'}`}
             variants={itemVariants}
           >
             <AnimatePresence mode="wait">
@@ -68,7 +68,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="text-amber-400 font-medium mb-4 text-center md:text-left"
+                className={`text-amber-400 font-medium mb-4 text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}
               >
                 {t.hero.tagline}
               </motion.p>
@@ -81,7 +81,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-center md:text-left"
+                className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}
               >
                 {t.hero.title}
               </motion.h1>
@@ -94,7 +94,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="text-gray-700 mb-8 max-w-md text-base sm:text-lg text-center md:text-left"
+                className={`text-gray-700 mb-8 max-w-md text-base sm:text-lg text-center ${isRTL ? 'md:text-right' : 'md:text-left'}`}
               >
                 {t.hero.description}
               </motion.p>

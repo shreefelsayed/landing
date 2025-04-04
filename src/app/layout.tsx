@@ -1,14 +1,28 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/contexts/LanguageContext"
+import { LayoutContent } from "@/components/layout-content"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "MADFOATECH",
+  title: "Madfoatech",
   description: "POS Solution for your business",
+  icons: {
+    icon: [
+      {
+        url: '/images/logo.png',
+        type: 'image/png',
+      },
+    ],
+    apple: [
+      {
+        url: '/images/logo.png',
+        type: 'image/png',
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -17,20 +31,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <LanguageProvider>
-            {children}
-          </LanguageProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <LanguageProvider>
+      <LayoutContent>
+        <div className={inter.className}>
+          {children}
+        </div>
+      </LayoutContent>
+    </LanguageProvider>
   )
 }
 
