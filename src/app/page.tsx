@@ -7,7 +7,7 @@ import { PaymentOptionsSection } from "../components/payment-options-section"
 import { CTASection } from "../components/cta-section"
 import { FAQSection } from "../components/faq-section"
 import { Footer } from "../components/footer"
-
+///
 export default function Home() {
   return (
     <div className="">
