@@ -201,6 +201,7 @@ html, :host {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
+  -o-tab-size: 4;
   tab-size: 4;
   font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-feature-settings: normal;
@@ -220,6 +221,7 @@ hr {
 }
 
 abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 
@@ -351,6 +353,11 @@ dialog {
 
 textarea {
   resize: vertical;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  color: #9ca3af;
 }
 
 input::placeholder, textarea::placeholder {
@@ -1129,7 +1136,9 @@ body {
 }
 
 .transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
   transition-duration: .15s;
 }

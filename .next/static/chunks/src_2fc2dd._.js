@@ -722,18 +722,22 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
-// Seeded random number generator
 __turbopack_esm__({
+    "benefitsPatternCells": (()=>benefitsPatternCells),
+    "generatePatternCells": (()=>generatePatternCells),
+    "heroPatternCells": (()=>heroPatternCells),
     "patternCells": (()=>patternCells)
 });
-function seededRandom(seed) {
-    const x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-const patternCells = Array(400).fill(0).map((_, i)=>{
-    // Use the index as a stable seed for "randomness"
-    return seededRandom(i * 13) > 0.8;
-});
+const generatePatternCells = (seed)=>{
+    return Array(400).fill(0).map((_, i)=>{
+        // Use the index and seed for stable "randomness"
+        const isWhite = (i * 13 + seed) % 100 > 80;
+        return isWhite;
+    });
+};
+const patternCells = generatePatternCells(1);
+const heroPatternCells = generatePatternCells(2);
+const benefitsPatternCells = generatePatternCells(3);
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
 }
@@ -1008,7 +1012,7 @@ function HeroSection() {
                                     className: "absolute inset-0 opacity-10",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "grid grid-cols-20 grid-rows-20 h-full w-full",
-                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$background$2d$pattern$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["patternCells"].map((isWhite, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$background$2d$pattern$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["heroPatternCells"].map((isWhite, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                                                 className: isWhite ? "bg-white" : "",
                                                 initial: {
                                                     opacity: 0
@@ -1330,7 +1334,7 @@ function BenefitsSection() {
                                         className: "absolute inset-0 opacity-10",
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "grid grid-cols-20 grid-rows-20 h-full w-full",
-                                            children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$background$2d$pattern$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["patternCells"].map((isWhite, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                            children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$background$2d$pattern$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["benefitsPatternCells"].map((isWhite, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                                                     className: isWhite ? "bg-white" : "",
                                                     initial: {
                                                         opacity: 0
@@ -2220,12 +2224,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/image.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$contexts$2f$LanguageContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/contexts/LanguageContext.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$translations$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/lib/translations.ts [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$background$2d$pattern$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/lib/background-pattern.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__ = __turbopack_import__("[project]/node_modules/lucide-react/dist/esm/icons/arrow-right.js [app-client] (ecmascript) <export default as ArrowRight>");
 ;
 var _s = __turbopack_refresh__.signature();
 "use client";
-;
 ;
 ;
 ;
@@ -2243,21 +2245,21 @@ function CTASection() {
                     className: "absolute inset-0 opacity-10",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid grid-cols-20 grid-rows-20 h-full w-full",
-                        children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$background$2d$pattern$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["patternCells"].map((isWhite, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: isWhite ? "bg-white" : ""
+                        children: Array(400).fill(0).map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: `${Math.random() > 0.8 ? "bg-white" : ""}`
                             }, i, false, {
                                 fileName: "[project]/src/components/cta-section.tsx",
-                                lineNumber: 21,
-                                columnNumber: 15
+                                lineNumber: 22,
+                                columnNumber: 17
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/components/cta-section.tsx",
-                        lineNumber: 19,
+                        lineNumber: 18,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/cta-section.tsx",
-                    lineNumber: 18,
+                    lineNumber: 17,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2271,7 +2273,7 @@ function CTASection() {
                                     children: t.cta.title
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cta-section.tsx",
-                                    lineNumber: 28,
+                                    lineNumber: 29,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2279,7 +2281,7 @@ function CTASection() {
                                     children: t.cta.subtitle
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/cta-section.tsx",
-                                    lineNumber: 29,
+                                    lineNumber: 30,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2293,13 +2295,13 @@ function CTASection() {
                                                     size: 16
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/cta-section.tsx",
-                                                    lineNumber: 33,
+                                                    lineNumber: 34,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/cta-section.tsx",
-                                            lineNumber: 31,
+                                            lineNumber: 32,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2307,19 +2309,19 @@ function CTASection() {
                                             children: t.cta.contactSales
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cta-section.tsx",
-                                            lineNumber: 35,
+                                            lineNumber: 36,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/cta-section.tsx",
-                                    lineNumber: 30,
+                                    lineNumber: 31,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/cta-section.tsx",
-                            lineNumber: 27,
+                            lineNumber: 28,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2337,12 +2339,12 @@ function CTASection() {
                                             className: "transform -rotate-6 w-32 md:w-auto"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cta-section.tsx",
-                                            lineNumber: 45,
+                                            lineNumber: 46,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cta-section.tsx",
-                                        lineNumber: 44,
+                                        lineNumber: 45,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2355,40 +2357,40 @@ function CTASection() {
                                             className: " md:w-auto"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/cta-section.tsx",
-                                            lineNumber: 56,
+                                            lineNumber: 57,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/cta-section.tsx",
-                                        lineNumber: 55,
+                                        lineNumber: 56,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/cta-section.tsx",
-                                lineNumber: 42,
+                                lineNumber: 43,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/cta-section.tsx",
-                            lineNumber: 41,
+                            lineNumber: 42,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/cta-section.tsx",
-                    lineNumber: 26,
+                    lineNumber: 27,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/cta-section.tsx",
-            lineNumber: 16,
+            lineNumber: 15,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/cta-section.tsx",
-        lineNumber: 15,
+        lineNumber: 14,
         columnNumber: 5
     }, this);
 }

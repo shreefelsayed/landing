@@ -1,13 +1,14 @@
-// Seeded random number generator
-function seededRandom(seed: number) {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
+export const generatePatternCells = (seed: number) => {
+  return Array(400)
+    .fill(0)
+    .map((_, i) => {
+      // Use the index and seed for stable "randomness"
+      const isWhite = ((i * 13 + seed) % 100) > 80;
+      return isWhite;
+    });
+};
 
-// Generate a stable pattern of 400 cells
-export const patternCells = Array(400)
-  .fill(0)
-  .map((_, i) => {
-    // Use the index as a stable seed for "randomness"
-    return seededRandom(i * 13) > 0.8;
-  }); 
+// Pre-generate patterns for different sections
+export const patternCells = generatePatternCells(1);
+export const heroPatternCells = generatePatternCells(2);
+export const benefitsPatternCells = generatePatternCells(3); 

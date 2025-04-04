@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react"
 import React from "react"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { translations } from "@/lib/translations"
-import { patternCells } from "@/lib/background-pattern"
 
 export function CTASection() {
   const { language } = useLanguage()
@@ -17,9 +16,11 @@ export function CTASection() {
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
-            {patternCells.map((isWhite, i) => (
-              <div key={i} className={isWhite ? "bg-white" : ""}></div>
-            ))}
+            {Array(400)
+              .fill(0)
+              .map((_, i) => (
+                <div key={i} className={`${Math.random() > 0.8 ? "bg-white" : ""}`}></div>
+              ))}
           </div>
         </div>
 

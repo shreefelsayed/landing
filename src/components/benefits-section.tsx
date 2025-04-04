@@ -6,7 +6,7 @@ import React from "react"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { translations } from "@/lib/translations"
 import { motion, useInView } from "framer-motion"
-import { patternCells } from "@/lib/background-pattern"
+import { benefitsPatternCells } from "@/lib/background-pattern"
 
 export function BenefitsSection() {
   const { language } = useLanguage()
@@ -113,7 +113,7 @@ export function BenefitsSection() {
                 {/* Pixel pattern overlay */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
-                    {patternCells.map((isWhite, i) => (
+                    {benefitsPatternCells.map((isWhite, i) => (
                       <motion.div 
                         key={i} 
                         className={isWhite ? "bg-white" : ""}

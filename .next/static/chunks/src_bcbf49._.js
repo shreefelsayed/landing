@@ -1725,18 +1725,22 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
-// Seeded random number generator
 __turbopack_esm__({
+    "benefitsPatternCells": (()=>benefitsPatternCells),
+    "generatePatternCells": (()=>generatePatternCells),
+    "heroPatternCells": (()=>heroPatternCells),
     "patternCells": (()=>patternCells)
 });
-function seededRandom(seed) {
-    const x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-const patternCells = Array(400).fill(0).map((_, i)=>{
-    // Use the index as a stable seed for "randomness"
-    return seededRandom(i * 13) > 0.8;
-});
+const generatePatternCells = (seed)=>{
+    return Array(400).fill(0).map((_, i)=>{
+        // Use the index and seed for stable "randomness"
+        const isWhite = (i * 13 + seed) % 100 > 80;
+        return isWhite;
+    });
+};
+const patternCells = generatePatternCells(1);
+const heroPatternCells = generatePatternCells(2);
+const benefitsPatternCells = generatePatternCells(3);
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
 }

@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext"
 import { translations } from "@/lib/translations"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { patternCells } from "@/lib/background-pattern"
+import { heroPatternCells } from "@/lib/background-pattern"
 
 export function HeroSection() {
   const { language } = useLanguage()
@@ -138,7 +138,7 @@ export function HeroSection() {
             >
               <div className="absolute inset-0 opacity-10">
                 <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
-                  {patternCells.map((isWhite, i) => (
+                  {heroPatternCells.map((isWhite, i) => (
                     <motion.div 
                       key={i} 
                       className={isWhite ? "bg-white" : ""}
