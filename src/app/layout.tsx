@@ -1,10 +1,8 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import { LanguageProvider } from "@/contexts/LanguageContext"
 import { LayoutContent } from "@/components/layout-content"
-
-const inter = Inter({ subsets: ["latin"] })
+import { ErrorBoundary } from "@/components/error-boundary"
 
 export const metadata: Metadata = {
   title: "Madfoatech",
@@ -31,13 +29,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <LanguageProvider>
-      <LayoutContent>
-        <div className={inter.className}>
-          {children}
-        </div>
-      </LayoutContent>
-    </LanguageProvider>
+    <html lang="en">
+      <body>
+        <ErrorBoundary>
+          <LanguageProvider>
+            <LayoutContent>
+              {children}
+            </LayoutContent>
+          </LanguageProvider>
+        </ErrorBoundary>
+      </body>
+    </html>
   )
 }
 
