@@ -59,6 +59,10 @@ const config = {
         amber: {
           400: "#FBBC05",
         },
+        blueGradient: {
+          start: "#3F85DC",
+          end: "#346EB6E5",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

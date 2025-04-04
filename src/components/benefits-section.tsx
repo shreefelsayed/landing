@@ -1,95 +1,191 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import React from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { translations } from "@/lib/translations"
+import { motion, useInView } from "framer-motion"
+
 export function BenefitsSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
+  const ref = React.useRef(null)
+  const inView = useInView(ref, {
+    once: true,
+    amount: 0.1
+  })
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0, rotate: -20 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      rotate: -10,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
   return (
-    <section className="container py-12">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
-        Reap the Benefits of Setting up a POS Solution
-      </h2>
+    <section className="container py-12 overflow-hidden">
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
+        <motion.h2 
+          variants={itemVariants}
+          className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12"
+        >
+          {t.benefits.title}
+        </motion.h2>
 
-      {/* Benefit Cards */}
-      <div className="space-y-6">
-        {/* Card 1 - Maximize Sales Revenue */}
-        <div className="bg-blue-500 rounded-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center p-6 md:p-8">
-            <div className="order-2 md:order-1">
-              <Image
-                src="/images/phone.png"
-                width={400}
-                height={300}
-                alt="POS Dashboard"
-                className="mx-auto transform -rotate-6"
-              />
-            </div>
-            <div className="order-1 md:order-2 text-white mb-8 md:mb-0">
-              <h3 className="text-xl md:text-2xl font-semibold mb-4">Maximize Sales Revenue</h3>
-              <p className="mb-6">
-                Add more point of sale payment methods to widen your revenue potential by allowing customers the choice
-                to use their preferred payment method at your store : card payments, cash payments, digital wallets or
-                even installments.
-              </p>
-              <button className="bg-white text-blue-500 px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-100 transition-colors">
-                Order your POS
-                <ArrowRight size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Benefit Cards */}
+        <motion.div className="space-y-6" variants={containerVariants}>
+          {[
+            {
+              title: t.benefits.card1.title,
+              description: t.benefits.card1.description,
+              cta: t.benefits.card1.cta,
+              imageOrder: "order-1",
+              contentOrder: "order-2",
+              rotate: -10
+            },
+            {
+              title: t.benefits.card2.title,
+              description: t.benefits.card2.description,
+              cta: t.benefits.card2.cta,
+              imageOrder: "order-2",
+              contentOrder: "order-1",
+              rotate: 10
+            },
+            {
+              title: t.benefits.card3.title,
+              description: t.benefits.card3.description,
+              cta: t.benefits.card3.cta,
+              imageOrder: "order-1",
+              contentOrder: "order-2",
+              rotate: -10
+            }
+          ].map((card, index) => (
+            <motion.div 
+              key={index}
+              variants={itemVariants}
+              className="rounded-lg overflow-hidden relative group"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Background gradient with pixel pattern */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-blueGradient-start to-blueGradient-end"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                {/* Pixel pattern overlay */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
+                    {Array(400)
+                      .fill(0)
+                      .map((_, i) => (
+                        <motion.div 
+                          key={i} 
+                          className={`${Math.random() > 0.8 ? "bg-white" : ""}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 1, delay: i * 0.001 }}
+                        />
+                      ))}
+                  </div>
+                </div>
+              </motion.div>
 
-        {/* Card 2 - Exceptionally Easy Onboarding */}
-        <div className="bg-blue-500 rounded-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center p-6 md:p-8">
-            <div className="text-white mb-8 md:mb-0">
-              <h3 className="text-xl md:text-2xl font-semibold mb-4">Exceptionally Easy Onboarding</h3>
-              <p className="mb-6">
-                Onboarding has never been easier. Order and receive your POS device immediately! Sign up and we will
-                take care of the rest.
-              </p>
-              <button className="bg-white text-blue-500 px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-100 transition-colors">
-                Order your POS
-                <ArrowRight size={16} />
-              </button>
-            </div>
-            <div>
-              <Image
-                src="/images/phone.png"
-                width={400}
-                height={300}
-                alt="POS Dashboard"
-                className="mx-auto transform rotate-6"
-              />
-            </div>
-          </div>
-        </div>
+              <div className="relative z-10 p-8 md:p-10 flex flex-col md:flex-row items-center">
+                {/* Image */}
+                <motion.div 
+                  className={`md:w-1/2 mb-8 md:mb-0 flex justify-center ${card.imageOrder}`}
+                  variants={imageVariants}
+                  whileHover={{ rotate: card.rotate + 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src="/images/phone.png"
+                    width={300}
+                    height={600}
+                    alt="POS Dashboard"
+                    className="rounded-3xl"
+                  />
+                </motion.div>
 
-        {/* Card 3 - Daily Settlement Guarantees */}
-        <div className="bg-blue-500 rounded-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center p-6 md:p-8">
-            <div className="order-2 md:order-1">
-              <Image
-                src="/images/phone.png"
-                width={400}
-                height={300}
-                alt="POS Dashboard"
-                className="mx-auto transform -rotate-6"
-              />
-            </div>
-            <div className="order-1 md:order-2 text-white mb-8 md:mb-0">
-              <h3 className="text-xl md:text-2xl font-semibold mb-4">Daily Settlement Guarantees</h3>
-              <p className="mb-6">
-                Receive your money right away and enjoy guaranteed daily settlements, never worry about cash flow delays
-                again.
-              </p>
-              <button className="bg-white text-blue-500 px-4 py-2 rounded-md flex items-center gap-2 hover:bg-gray-100 transition-colors">
-                Order your POS
-                <ArrowRight size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+                {/* Content */}
+                <motion.div 
+                  className={`md:w-1/2 text-white ${card.contentOrder}`}
+                  variants={itemVariants}
+                >
+                  <motion.h3 
+                    className="text-2xl md:text-3xl font-bold mb-4"
+                    whileHover={{ x: 10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {card.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="mb-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    {card.description}
+                  </motion.p>
+                  <motion.button 
+                    className="bg-white text-blue-500 px-5 py-2 rounded-md flex items-center gap-2 hover:bg-gray-100 transition-colors group"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {card.cta}
+                    <motion.span
+                      initial={{ x: 0 }}
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight size={16} />
+                    </motion.span>
+                  </motion.button>
+                </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
+
 

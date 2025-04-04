@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/styles/pattern.module.css"],"sourcesContent":[".pattern {\r\n  position: absolute;\r\n  inset: 0;\r\n  opacity: 0.1;\r\n  display: grid;\r\n  grid-template-columns: repeat(20, 1fr);\r\n  grid-template-rows: repeat(20, 1fr);\r\n}\r\n\r\n.patternCell {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.patternCell:nth-child(3n) {\r\n  background-color: white;\r\n} "],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;AAKA"}},
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

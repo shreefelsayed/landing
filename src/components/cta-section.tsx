@@ -1,10 +1,18 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import React from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { translations } from "@/lib/translations"
+
 export function CTASection() {
+  const { language } = useLanguage()
+  const t = translations[language]
+
   return (
     <section className="container py-12 md:py-16 my-8 md:my-16 relative">
-      <div className="bg-blue-500 rounded-lg overflow-hidden relative">
+      <div className="bg-gradient-to-r from-blueGradient-start to-blueGradient-end rounded-lg overflow-hidden relative">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="grid grid-cols-20 grid-rows-20 h-full w-full">
@@ -18,15 +26,15 @@ export function CTASection() {
 
         <div className="relative z-10 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row items-center">
           <div className="text-white md:w-1/2 mb-10 md:mb-0">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Ready To Get Started?</h2>
-            <p className="text-lg md:text-xl mb-8">Get in touch or create an account.</p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{t.cta.title}</h2>
+            <p className="text-lg md:text-xl mb-8">{t.cta.subtitle}</p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="bg-white text-blue-500 px-6 md:px-8 py-2 md:py-3 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors">
-                start now
+                {t.cta.startNow}
                 <ArrowRight size={16} />
               </button>
               <button className="border border-white text-white px-6 md:px-8 py-2 md:py-3 rounded-md flex items-center justify-center hover:bg-blue-600 transition-colors">
-                Contact sales
+                {t.cta.contactSales}
               </button>
             </div>
           </div>
@@ -51,7 +59,7 @@ export function CTASection() {
                   width={250}
                   height={500}
                   alt="Wallet App"
-                  className="rounded-3xl border-8 border-black w-48 md:w-auto"
+                  className=" md:w-auto"
                 />
               </div>
             </div>
@@ -61,4 +69,5 @@ export function CTASection() {
     </section>
   )
 }
+
 

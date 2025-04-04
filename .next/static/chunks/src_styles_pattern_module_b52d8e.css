@@ -1,0 +1,20 @@
+/* [project]/src/styles/pattern.module.css [app-client] (css) */
+.pattern-module__qLSJ9a__pattern {
+  position: absolute;
+  inset: 0;
+  opacity: .1;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+
+.pattern-module__qLSJ9a__patternCell {
+  width: 100%;
+  height: 100%;
+}
+
+.pattern-module__qLSJ9a__patternCell:nth-child(3n) {
+  background-color: #fff;
+}
+
+/*# sourceMappingURL=src_styles_pattern_module_b52d8e.css.map*/

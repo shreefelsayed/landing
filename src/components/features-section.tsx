@@ -1,79 +1,125 @@
-import Image from "next/image"
+"use client"
+
 import React from "react"
+import Image from "next/image"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { translations } from "@/lib/translations"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
+
 export function FeaturesSection() {
+  const { language } = useLanguage()
+  const t = translations[language]
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
   return (
-    <section className="container py-12 md:py-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">POS Solution Features</h2>
-      <p className="text-center text-gray-600 mb-8 md:mb-12 max-w-3xl mx-auto px-4">
-        As the cryptocurrency ecosystem continues to evolve, it's essential for users to stay informed, exercise
-        caution,
-      </p>
+    <section className="container py-12 overflow-hidden">
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+      >
+        <motion.h2 
+          variants={itemVariants}
+          className="text-2xl md:text-3xl font-bold text-center mb-8"
+        >
+          {t.features.title}
+        </motion.h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <div className="border rounded-xl p-4 md:p-6 flex justify-center">
-          <Image
-            src="/images/wallet-app.png"
-            width={350}
-            height={700}
-            alt="Wallet App Dashboard"
-            className="rounded-xl"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <motion.div variants={imageVariants}>
+            <Image
+              src="/images/wallet-app.png"
+              width={400}
+              height={800}
+              alt="POS App Interface"
+              className="w-full max-w-md mx-auto"
+            />
+          </motion.div>
+
+          <motion.div 
+            className="space-y-6"
+            variants={containerVariants}
+          >
+            {[
+              { title: t.features.feature1.title, description: t.features.feature1.description },
+              { title: t.features.feature2.title, description: t.features.feature2.description },
+              { title: t.features.feature3.title, description: t.features.feature3.description },
+              { title: t.features.feature4.title, description: t.features.feature4.description }
+            ].map((feature, index) => (
+              <motion.div 
+                key={index}
+                variants={itemVariants}
+                className="flex items-start gap-4 group"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.div 
+                  className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition-colors"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="text-blue-500 font-semibold">{index + 1}</span>
+                </motion.div>
+                <div>
+                  <motion.h3 
+                    className="text-lg font-semibold mb-2 group-hover:text-blue-600 transition-colors"
+                  >
+                    {feature.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-gray-600"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    {feature.description}
+                  </motion.p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-
-        <div className="space-y-6 px-4 md:px-0">
-          <div className="border rounded-xl p-4 md:p-6 relative">
-            <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border bg-white flex items-center justify-center">
-              <span className="font-semibold">1</span>
-            </div>
-            <h3 className="text-lg md:text-xl font-semibold mb-2">Dashboard Management Tools</h3>
-            <p className="text-gray-600 mb-4">
-              Paymob's dashboard provides real-time transaction tracking and detailed history insights.
-            </p>
-            <ul className="list-disc pl-5 text-gray-600 space-y-1">
-              <li>Need a quick glance at your daily sales figures?</li>
-              <li>Looking to run a quick daily audit?</li>
-            </ul>
-          </div>
-
-          <div className="border-l-2 border-dashed h-8 ml-4"></div>
-
-          <div className="border rounded-xl p-4 md:p-6 relative">
-            <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border bg-white flex items-center justify-center">
-              <span className="font-semibold">2</span>
-            </div>
-            <h3 className="text-lg md:text-xl font-semibold mb-2">High Performance Device</h3>
-            <p className="text-gray-600">
-              Paymob's Android POS device ensures fast, secure, and seamless payments with a smart touchscreen and easy
-              checkout.
-            </p>
-          </div>
-
-          <div className="border-l-2 border-dashed h-8 ml-4"></div>
-
-          <div className="border rounded-xl p-4 md:p-6 relative">
-            <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border bg-white flex items-center justify-center">
-              <span className="font-semibold">3</span>
-            </div>
-            <h3 className="text-lg md:text-xl font-semibold mb-2">Contactless (NFC Payments)</h3>
-            <p className="text-gray-600">
-              Let your customers pay by tapping their card on the POS using NFC technology. It's faster and easier than
-              inserting cards and entering PIN numbers.
-            </p>
-          </div>
-
-          <div className="border-l-2 border-dashed h-8 ml-4"></div>
-
-          <div className="border rounded-xl p-4 md:p-6 relative">
-            <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border bg-white flex items-center justify-center">
-              <span className="font-semibold">4</span>
-            </div>
-            <h3 className="text-lg md:text-xl font-semibold mb-2">Printed Receipt for All Transactions</h3>
-            <p className="text-gray-600">
-              Printed receipts for all types of transactions with your company's brand name.
-            </p>
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
