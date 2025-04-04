@@ -11,22 +11,33 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false)
   const [language, setLanguage] = useState<Language>('en')
 
   useEffect(() => {
-    // Check if language is stored in localStorage
+    // Only run on client side
     const storedLanguage = localStorage.getItem('language') as Language | null
     if (storedLanguage) {
       setLanguage(storedLanguage)
     }
+    setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
+      document.documentElement.lang = language
+    }
+  }, [language, mounted])
 
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang)
     localStorage.setItem('language', lang)
-    // Update document direction based on language
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
-    document.documentElement.lang = lang
+  }
+
+  // Don't render children until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return null
   }
 
   return (

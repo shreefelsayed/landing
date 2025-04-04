@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ArrowLeft } from "lucide-react"
 import React from "react"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { translations } from "@/lib/translations"
@@ -171,10 +171,10 @@ export function BenefitsSection() {
                     {card.cta}
                     <motion.span
                       initial={{ x: 0 }}
-                      whileHover={{ x: 5 }}
+                      whileHover={{ x: language === 'en' ? 5 : -5 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <ArrowRight size={16} />
+                      {language === 'en' ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
                     </motion.span>
                   </motion.button>
                 </motion.div>
